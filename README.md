@@ -34,21 +34,30 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 
 ## Project Architecture
 
-```textalice-track-a-team-Lim/
+```
+alice-track-a-team-Lim/
 ├── backend/                  # FastAPI Application
-│   ├── artifacts/            # Serialized forecasting model
-│   ├── services/             # Core logic: preprocessing, forecasting, optimization
+│   ├── artifacts/            # Exported XGBoost model (.joblib) & weather_hourly.csv
+│   ├── sample_test/          # 2018 evaluation data slice for end-to-end testing
+│   ├── services/             # Pipeline logic: preprocessing, forecasting, optimization
+|   ├── README.md             # Project documentation
 │   ├── config.py             # App configurations
 │   ├── main.py               # REST API entry points
+│   ├── requirements.txt      # Python dependencies
 │   └── schemas.py            # Pydantic schemas
 ├── frontend/                 # Streamlit UI Dashboard
 │   ├── components/           # Reusable widgets (cards, charts, sidebar)
 │   ├── pages/                # Multi-page app (Overview, Forecasting, XAI, Optimization)
 │   ├── utils/                # API client & formatting helpers
-│   └── app.py                # Dashboard entry point
-├── notebooks/                # Jupyter Notebooks (01_EDA -> 02_Training -> 03_XAI)
+|   ├── README.md             # Project documentation
+│   ├── app.py                # Dashboard entry point
+│   └── requirements.txt      # Python dependencies
 ├── images/                   # Visualizations (EDA & SHAP charts)
 ├── models/                   # Persisted model pipeline (.joblib)
+├── notebooks/                # Jupyter Notebooks 
+|   ├── 01_data_exploration.ipynb          # EDA, frequency check, lag autocorrelation & dead columns
+│   ├── 02_model_training.ipynb            # Pipeline fitting, baseline benchmarks, XGBoost selection
+│   └── 03_explainability_and_export.ipynb # SHAP analysis, permutation importance, artifact export
 ├── .gitignore                # Git ignore rules
 ├── README.md                 # Project documentation
 └── requirements.txt          # Python dependencies
@@ -56,10 +65,27 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 
 ---
 
+## Dataset Access & Reproduction
+The raw datasets are sourced from the Kaggle Energy Consumption & Weather Dataset (Spain):
+
+Download **energy_dataset.csv** and **weather_features.csv** from https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather.
+
+Place both CSVs under data/.
+
+Execute the notebooks sequentially:
+
+- notebooks/01_data_exploration.ipynb
+
+- notebooks/02_model_training.ipynb
+
+- notebooks/03_explainability_and_export.ipynb
+
+---
+
 ## How to Run
 
 ### 1. Clone & Install Dependencies
-```bash
+```
 git clone [https://github.com/QingLTC/alice-track-a-team-Lim.git](https://github.com/QingLTC/alice-track-a-team-Lim.git)
 cd alice-track-a-team-Lim
 
@@ -73,7 +99,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Start the Backend API
-```Bash
+```
 cd backend
 uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ```
@@ -81,7 +107,7 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 
 ### 3. Start the Frontend Dashboard
 Open a new terminal tab (activate .venv first):
-```Bash
+```
 cd frontend
 streamlit run app.py
 ```
@@ -90,4 +116,13 @@ streamlit run app.py
 ---
 
 ## Contribution
-Lim Tze Chin: Completed all parts independently, including data engineering, ML modeling, explainability analysis, optimization formulation, and full-stack implementation.
+Lim Tze Chin: Completed all parts independently
+- Data Engineering: Data cleaning, frequency validation, physical anomaly clipping, cross-city weather aggregation, and leakage-proof lag generation.
+
+- Machine Learning: Baseline implementations, hyperparameter tuning, model benchmarking (Ridge, HistGradientBoosting, XGBoost), and serialization of production artifacts.
+
+- Model Explainability: Global feature importance and local SHAP decision breakdowns.
+
+- Backend Architecture: FastAPI design with Pydantic schemas, lifespan artifact management, and input validation.
+
+- Decision Support & Frontend: Linear programming (PuLP) cost & emission dispatch optimization and interactive Streamlit UI.
