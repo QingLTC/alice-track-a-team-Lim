@@ -34,20 +34,24 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 
 ## Project Architecture
 
-```text
-alice-track-a-team-Lim/
-├── backend/                  # FastAPI Application (Endpoints & Services)
-│   ├── artifacts/            # Serialized models & offline features
-│   ├── services/             # Preprocessing, forecasting, and optimization logic
-│   └── main.py               # REST API entry point
-├── frontend/                 # Streamlit User Interface
-│   ├── components/           # Reusable UI widgets (cards, charts, sidebar)
-│   ├── pages/                # Multi-page views (Overview, Forecasting, XAI, Optimization)
+```textalice-track-a-team-Lim/
+├── backend/                  # FastAPI Application
+│   ├── artifacts/            # Serialized forecasting model
+│   ├── services/             # Core logic: preprocessing, forecasting, optimization
+│   ├── config.py             # App configurations
+│   ├── main.py               # REST API entry points
+│   └── schemas.py            # Pydantic schemas
+├── frontend/                 # Streamlit UI Dashboard
+│   ├── components/           # Reusable widgets (cards, charts, sidebar)
+│   ├── pages/                # Multi-page app (Overview, Forecasting, XAI, Optimization)
+│   ├── utils/                # API client & formatting helpers
 │   └── app.py                # Dashboard entry point
-├── notebooks/                # Jupyter Notebooks (EDA, Model Training, Explainability)
-├── images/                   # Visualizations & analytical charts
-├── models/                   # Persisted model artifacts (.joblib)
-└── requirements.txt          # Project dependencies
+├── notebooks/                # Jupyter Notebooks (01_EDA -> 02_Training -> 03_XAI)
+├── images/                   # Visualizations (EDA & SHAP charts)
+├── models/                   # Persisted model pipeline (.joblib)
+├── .gitignore                # Git ignore rules
+├── README.md                 # Project documentation
+└── requirements.txt          # Python dependencies
 ```
 
 ---
