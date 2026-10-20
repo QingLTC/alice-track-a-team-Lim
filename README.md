@@ -40,14 +40,18 @@ alice-track-a-team-Lim/
 │   ├── artifacts/            # Exported XGBoost model (.joblib) & weather_hourly.csv
 │   ├── sample_test/          # 2018 evaluation data slice for end-to-end testing
 │   ├── services/             # Pipeline logic: preprocessing, forecasting, optimization
+|   ├── README.md             # Project documentation
 │   ├── config.py             # App configurations
 │   ├── main.py               # REST API entry points
+│   ├── requirements.txt      # Python dependencies
 │   └── schemas.py            # Pydantic schemas
 ├── frontend/                 # Streamlit UI Dashboard
 │   ├── components/           # Reusable widgets (cards, charts, sidebar)
 │   ├── pages/                # Multi-page app (Overview, Forecasting, XAI, Optimization)
 │   ├── utils/                # API client & formatting helpers
-│   └── app.py                # Dashboard entry point
+|   ├── README.md             # Project documentation
+│   ├── app.py                # Dashboard entry point
+│   └── requirements.txt      # Python dependencies
 ├── images/                   # Visualizations (EDA & SHAP charts)
 ├── models/                   # Persisted model pipeline (.joblib)
 ├── notebooks/                # Jupyter Notebooks 
