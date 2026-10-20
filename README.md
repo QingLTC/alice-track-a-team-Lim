@@ -1,6 +1,89 @@
-# ALICE Track A - Team Lim
+# ALICE Track A - Energy Forecasting & Optimization Platform
 
-## Contribution Breakdown
+> **Team Lim** | Developed by **Lim Tze Chin** (Individual Project - Completed all parts)
 
-* **Lim Tze Chin (Individual Project)**: 
-  * Completed all part
+An end-to-end energy analytics and battery storage dispatch system for ALICE Track A. The project integrates hourly load forecasting, model explainability (XAI), and battery cost-optimization into a decoupled full-stack application (FastAPI + Streamlit).
+
+---
+
+## Project Overview
+- **Objective**: Accurately forecast hourly energy demand using historical load and meteorological features, analyze key feature drivers with XAI, and optimize battery storage charging/discharging schedules.
+- **Key Deliverables**:
+  - Full experimental pipeline: Data exploration, preprocessing, model benchmarking, and SHAP interpretability.
+  - Production-ready FastAPI backend serving prediction & optimization APIs.
+  - Interactive multi-page Streamlit dashboard for real-time monitoring and dispatch control.
+
+---
+
+## Key Results & Visualizations
+
+### 1. Forecast vs. Actual Load
+Evaluation of model performance across historical periods:
+<p align="center">
+  <img src="images/partC/pred_week.png" alt="Weekly Forecast vs Actual" width="80%">
+</p>
+
+### 2. Model Explainability (SHAP Analysis)
+Feature attribution showing how weather factors (e.g., temperature) and cyclical lag features influence peak electricity demand:
+<p align="center">
+  <img src="images/partC/shap_beeswarm.png" alt="SHAP Beeswarm" width="48%">
+  <img src="images/partC/shap_waterfall.png" alt="SHAP Waterfall" width="48%">
+</p>
+
+---
+
+## Project Architecture
+
+```text
+alice-track-a-team-Lim/
+├── backend/                  # FastAPI Application (Endpoints & Services)
+│   ├── artifacts/            # Serialized models & offline features
+│   ├── services/             # Preprocessing, forecasting, and optimization logic
+│   └── main.py               # REST API entry point
+├── frontend/                 # Streamlit User Interface
+│   ├── components/           # Reusable UI widgets (cards, charts, sidebar)
+│   ├── pages/                # Multi-page views (Overview, Forecasting, XAI, Optimization)
+│   └── app.py                # Dashboard entry point
+├── notebooks/                # Jupyter Notebooks (EDA, Model Training, Explainability)
+├── images/                   # Visualizations & analytical charts
+├── models/                   # Persisted model artifacts (.joblib)
+└── requirements.txt          # Project dependencies
+```
+
+---
+
+## How to Run
+
+### 1. Clone & Install Dependencies
+```bash
+git clone [https://github.com/QingLTC/alice-track-a-team-Lim.git](https://github.com/QingLTC/alice-track-a-team-Lim.git)
+cd alice-track-a-team-Lim
+
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+# source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+### 2. Start the Backend API
+```Bash
+cd backend
+uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+```
+- API Documentation (Swagger UI): http://127.0.0.1:8000/docs
+
+### 3. Start the Frontend Dashboard
+Open a new terminal tab (activate .venv first):
+```Bash
+cd frontend
+streamlit run app.py
+```
+- Dashboard URL: http://localhost:8501
+
+---
+
+## Contribution
+Lim Tze Chin: Completed all parts independently, including data engineering, ML modeling, explainability analysis, optimization formulation, and full-stack implementation.
