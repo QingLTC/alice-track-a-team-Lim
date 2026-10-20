@@ -66,7 +66,6 @@ The raw datasets are sourced from the Kaggle Energy Consumption & Weather Datase
 
 Download **energy_dataset.csv** and **weather_features.csv** from https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather.
 
-```
 Place both CSVs under data/.
 
 Execute the notebooks sequentially:
@@ -76,7 +75,6 @@ Execute the notebooks sequentially:
 - notebooks/02_model_training.ipynb
 
 - notebooks/03_explainability_and_export.ipynb
-```
 
 ---
 
