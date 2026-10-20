@@ -36,8 +36,9 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 
 ```textalice-track-a-team-Lim/
 ├── backend/                  # FastAPI Application
-│   ├── artifacts/            # Serialized forecasting model
-│   ├── services/             # Core logic: preprocessing, forecasting, optimization
+│   ├── artifacts/            # Exported XGBoost model (.joblib) & weather_hourly.csv
+│   ├── sample_test/          # 2018 evaluation data slice for end-to-end testing
+│   ├── services/             # Pipeline logic: preprocessing, forecasting, optimization
 │   ├── config.py             # App configurations
 │   ├── main.py               # REST API entry points
 │   └── schemas.py            # Pydantic schemas
@@ -46,9 +47,12 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 │   ├── pages/                # Multi-page app (Overview, Forecasting, XAI, Optimization)
 │   ├── utils/                # API client & formatting helpers
 │   └── app.py                # Dashboard entry point
-├── notebooks/                # Jupyter Notebooks (01_EDA -> 02_Training -> 03_XAI)
 ├── images/                   # Visualizations (EDA & SHAP charts)
 ├── models/                   # Persisted model pipeline (.joblib)
+├── notebooks/                # Jupyter Notebooks 
+|   ├── 01_data_exploration.ipynb          # EDA, frequency check, lag autocorrelation & dead columns
+│   ├── 02_model_training.ipynb            # Pipeline fitting, baseline benchmarks, XGBoost selection
+│   └── 03_explainability_and_export.ipynb # SHAP analysis, permutation importance, artifact export
 ├── .gitignore                # Git ignore rules
 ├── README.md                 # Project documentation
 └── requirements.txt          # Python dependencies
@@ -90,4 +94,13 @@ streamlit run app.py
 ---
 
 ## Contribution
-Lim Tze Chin: Completed all parts independently, including data engineering, ML modeling, explainability analysis, optimization formulation, and full-stack implementation.
+Lim Tze Chin: Completed all parts independently
+- Data Engineering: Data cleaning, frequency validation, physical anomaly clipping, cross-city weather aggregation, and leakage-proof lag generation.
+
+- Machine Learning: Baseline implementations, hyperparameter tuning, model benchmarking (Ridge, HistGradientBoosting, XGBoost), and serialization of production artifacts.
+
+- Model Explainability: Global feature importance and local SHAP decision breakdowns.
+
+- Backend Architecture: FastAPI design with Pydantic schemas, lifespan artifact management, and input validation.
+
+- Decision Support & Frontend: Linear programming (PuLP) cost & emission dispatch optimization and interactive Streamlit UI.
