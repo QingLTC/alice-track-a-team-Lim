@@ -64,7 +64,7 @@ alice-track-a-team-Lim/
 ## Dataset Access & Reproduction
 The raw datasets are sourced from the Kaggle Energy Consumption & Weather Dataset (Spain):
 
-Download energy_dataset.csv and weather_features.csv from https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather.
+Download **energy_dataset.csv** and **weather_features.csv** from https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather.
 
 ```
 Place both CSVs under data/.
