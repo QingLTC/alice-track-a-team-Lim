@@ -34,7 +34,8 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 
 ## Project Architecture
 
-```textalice-track-a-team-Lim/
+```
+alice-track-a-team-Lim/
 ├── backend/                  # FastAPI Application
 │   ├── artifacts/            # Exported XGBoost model (.joblib) & weather_hourly.csv
 │   ├── sample_test/          # 2018 evaluation data slice for end-to-end testing
@@ -60,10 +61,29 @@ Feature attribution showing how weather factors (e.g., temperature) and cyclical
 
 ---
 
+## Dataset Access & Reproduction
+The raw datasets are sourced from the Kaggle Energy Consumption & Weather Dataset (Spain):
+
+```
+Download energy_dataset.csv and weather_features.csv from https://www.kaggle.com/datasets/nicholasjhana/energy-consumption-generation-prices-and-weather.
+
+Place both CSVs under data/.
+
+Execute the notebooks sequentially:
+
+- notebooks/01_data_exploration.ipynb
+
+- notebooks/02_model_training.ipynb
+
+- notebooks/03_explainability_and_export.ipynb
+```
+
+---
+
 ## How to Run
 
 ### 1. Clone & Install Dependencies
-```bash
+```
 git clone [https://github.com/QingLTC/alice-track-a-team-Lim.git](https://github.com/QingLTC/alice-track-a-team-Lim.git)
 cd alice-track-a-team-Lim
 
@@ -77,7 +97,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Start the Backend API
-```Bash
+```
 cd backend
 uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ```
@@ -85,7 +105,7 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 
 ### 3. Start the Frontend Dashboard
 Open a new terminal tab (activate .venv first):
-```Bash
+```
 cd frontend
 streamlit run app.py
 ```
