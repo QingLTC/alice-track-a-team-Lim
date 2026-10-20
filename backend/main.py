@@ -10,21 +10,18 @@ from services.optimization import optimize_mix
 from services.preprocessing import read_energy_csv
 
 
-# 1. 定义 lifespan（启动预热）
 @asynccontextmanager
 async def lifespan(app: FastAPI):
   load_artifact()
   yield
 
 
-# 2. 实例化 FastAPI 应用程序（必须放在所有 @app.xxx 路由的前面！）
 app = FastAPI(
     title="Track A - Energy Demand Forecasting API",
     version="1.0.0",
     lifespan=lifespan,
 )
 
-# 3. 添加跨域中间件
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -33,7 +30,6 @@ app.add_middleware(
 )
 
 
-# 4. 定义 API 路由接口
 @app.get("/health")
 def health():
   try:
